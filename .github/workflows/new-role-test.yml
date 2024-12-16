@@ -1,0 +1,19 @@
+name: New Role test
+on:
+  push:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build:
+    name: Test on ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.NEW_ROLE_TEST }}
+          aws-region: us-east-1
